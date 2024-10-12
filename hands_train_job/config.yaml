@@ -1,0 +1,19 @@
+name: hands_train_job
+desc: Script which uses DataSphere project resources – project disk, datasets.
+# cmd: python3 /workspace/main.py --input ${HANDS_DS} --model ${MODEL}
+cmd: ./run.sh ${HANDS_DS} ${MODEL}
+env:
+  docker:
+    image: cr.yandex/crpntcvhsvn7ju2anpul/microbo:biohack
+    # image: nvcr.io/nvidia/nemo:23.06
+  # python:
+  #   type: auto
+    # type: manual
+    # requirements-file: requirements.txt
+outputs:
+  - files_in_texts_directory.txt: MODEL
+datasets:
+  - bt136v85sh8bqppim6qe: HANDS_DS
+flags:
+  - attach-project-disk
+cloud-instance-type: g1.1

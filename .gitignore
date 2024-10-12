@@ -1,0 +1,14 @@
+build/
+dist/
+*.egg-info/
+
+__pycache__/
+.ipynb_checkpoints/
+
+out/
+out_64
+*.pth
+*.pkl
+
+hands_train_job/models/
+hands_train_job/images/
