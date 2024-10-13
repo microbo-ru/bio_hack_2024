@@ -8,11 +8,12 @@ import torchvision.transforms as T
 from PIL import Image
 from torchvision.utils import save_image
 import shutil
+from tqdm import tqdm
 
 # python inference.py -n 10 -o out
+
 parser = argparse.ArgumentParser(prog='example')
 parser.add_argument('-m', '--model', nargs='?', default='weights/hands_final_epoch_checkpoint.pkl', help='Input model')
-# parser.add_argument('-m', '--model', nargs='?', default='hands_train_job/models/hands_final_epoch_checkpoint.pkl', help='Input model')
 parser.add_argument('-n', '--number', required=True, type=int, help='Number of images to generate')
 parser.add_argument('-o', '--output', required=True, help='Output folder for images')
 
@@ -96,9 +97,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # shutil.rmtree(Path(f'{args.output}/'))
     Path(args.output).mkdir(parents=True, exist_ok=True)
-    
 
     path_checkpoint = args.model
 
@@ -125,13 +124,17 @@ if __name__ == '__main__':
         fake_data = new_gen(random_noise).detach().cpu()
 
     # RealESRGAN
+    my_file = Path('weights/RealESRGAN_x8.pth')
+    if not my_file.is_file():
+        print("Please load weights for RealESRGAN. see Readme")
+
     scale_model = RealESRGAN(device, scale=8)
     scale_model.load_weights('weights/RealESRGAN_x8.pth', download=False)
 
     tmp_out = f'{args.output}_64'
     shutil.rmtree(Path(f'{tmp_out}/'))
     Path(tmp_out).mkdir(parents=True, exist_ok=True)
-    for idx, i in enumerate(fake_data):
+    for idx in tqdm(range(len(fake_data))):
         save_image(fake_data[idx], f'{tmp_out}/{idx}.png')
         image = Image.open(f'{tmp_out}/{idx}.png').convert('RGB')
         sr_image = scale_model.predict(image)

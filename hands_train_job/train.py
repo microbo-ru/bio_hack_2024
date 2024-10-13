@@ -61,7 +61,7 @@ if __name__ == '__main__':
     # Size of feature maps in discriminator
     ndf = 64
     # Number of training epochs
-    num_epochs = 500
+    num_epochs = 100
     # Learning rate for optimizers, same value as described in the DCGAN paper
     lr = 0.0002
     # Beta1 hyperparameter for Adam optimizers, same value as described in the DCGAN paper
