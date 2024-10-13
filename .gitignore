@@ -5,7 +5,7 @@ dist/
 __pycache__/
 .ipynb_checkpoints/
 
-# out/
+out/
 out_64
 *.pth
 *.pkl

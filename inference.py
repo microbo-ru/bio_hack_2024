@@ -100,6 +100,11 @@ if __name__ == '__main__':
     Path(args.output).mkdir(parents=True, exist_ok=True)
 
     path_checkpoint = args.model
+    
+    t_weights = Path(path_checkpoint)
+    if not t_weights.is_file():
+        print("Please load weights for palmar GAN. see Readme")
+        exit()
 
     num_img = args.number
     nb_row = math.ceil(math.sqrt(num_img))
@@ -124,9 +129,10 @@ if __name__ == '__main__':
         fake_data = new_gen(random_noise).detach().cpu()
 
     # RealESRGAN
-    my_file = Path('weights/RealESRGAN_x8.pth')
-    if not my_file.is_file():
+    t_weights = Path('weights/RealESRGAN_x8.pth')
+    if not t_weights.is_file():
         print("Please load weights for RealESRGAN. see Readme")
+        exit()
 
     scale_model = RealESRGAN(device, scale=8)
     scale_model.load_weights('weights/RealESRGAN_x8.pth', download=False)
