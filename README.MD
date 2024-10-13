@@ -9,6 +9,11 @@ wget https://storage.yandexcloud.net/biohack/RealESRGAN_x8.pth
 ```
 python inference.py -n 10 -o out
 ```
+# results
+
+example 1             |  example 2
+:-------------------------:|:-------------------------:
+![](./out/5.png)  |  ![](./out/8.png)
 
 # lic
 Real-ESRGAN Copyright (c) 2021, Sberbank AI
