@@ -1,1 +1,1 @@
-Example of project resources usage – project disk, datasets, secrets.
+Example of hands training project

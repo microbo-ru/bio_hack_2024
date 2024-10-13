@@ -1,6 +1,3 @@
-from IPython.display import HTML
-import matplotlib.animation as animation
-import matplotlib.pyplot as plt
 import math
 import numpy as np
 import os
@@ -11,8 +8,6 @@ import torch.optim as optim
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
-import zipfile
-
 
 if __name__ == '__main__':
     seed = 42
@@ -282,23 +277,23 @@ if __name__ == '__main__':
             D_losses.append(errD.item())
                 
         # Generate fake images to see how the generator is doing by saving G's output on fixed_noise at each epoch (fixed noise allow to obtain similar images).
-        if show_images == True:
-            with torch.no_grad():
-                # Uncomment the line below to generate a new variety of images every time
-                #fixed_noise = torch.randn(64, nz, 1, 1, device=device)
+        # if show_images == True:
+        #     with torch.no_grad():
+        #         # Uncomment the line below to generate a new variety of images every time
+        #         #fixed_noise = torch.randn(64, nz, 1, 1, device=device)
                 
-                fake = netG(fixed_noise).detach().cpu()
-                img_list.append(vutils.make_grid(fake[:nb_images], padding=2, normalize=True, nrow=nb_row))
+        #         fake = netG(fixed_noise).detach().cpu()
+        #         img_list.append(vutils.make_grid(fake[:nb_images], padding=2, normalize=True, nrow=nb_row))
 
-                plt.figure(figsize=(3, 3))
-                plt.axis("off")
-                plt.imshow(np.transpose(img_list[-1], (1, 2, 0)))
+        #         plt.figure(figsize=(3, 3))
+        #         plt.axis("off")
+        #         plt.imshow(np.transpose(img_list[-1], (1, 2, 0)))
                 
-                if save_images == True:
-                    plt.savefig(f'images/epoch_{epoch}_gen_images.png')
+        #         if save_images == True:
+        #             plt.savefig(f'images/epoch_{epoch}_gen_images.png')
                     
-                # Display image  
-                plt.show()
+        #         # Display image  
+        #         plt.show()
         
         # Save models each 5 epochs
         if epoch % 5 == 0:
