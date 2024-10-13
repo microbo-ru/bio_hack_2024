@@ -7,6 +7,7 @@ wget https://storage.yandexcloud.net/biohack/RealESRGAN_x8.pth
 # run
 
 ```
+pip install -r requirements.txt
 python inference.py -n 10 -o out
 ```
 # results
