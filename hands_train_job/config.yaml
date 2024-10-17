@@ -1,13 +1,13 @@
-name: hands_train_job
+name: hands_train_job_g1.1
 desc: Script which uses DataSphere project resources – project disk, datasets.
-cmd: ./run.sh ${HANDS_DS} ${MODEL}
+cmd: /workspace/run.sh ${HANDS_DS} ${MODEL}
 env:
   docker:
-    image: cr.yandex/crpntcvhsvn7ju2anpul/microbo:biohack
+    image: xhoopoe/pytorch:biohack
 outputs:
-  - files_in_texts_directory.txt: MODEL
+  - hands.pkl: MODEL
 datasets:
-  - bt136v85sh8bqppim6qe: HANDS_DS
+  - bt15u3bsavamvi6j1r21: HANDS_DS
 flags:
   - attach-project-disk
 cloud-instance-type: g1.1

@@ -4,4 +4,6 @@ RUN  apt-get update \
   && apt-get install -y wget \
   && rm -rf /var/lib/apt/lists/*
 
-COPY run.sh /workspace
+RUN wget https://storage.yandexcloud.net/biohack/run.sh -P /workspace
+
+RUN chmod +x /workspace/run.sh

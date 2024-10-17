@@ -28,7 +28,7 @@ if __name__ == '__main__':
     torch.backends.cudnn.benchmark = False
 
     # Define parameters
-    dataroot = f'{args.input}/hands_prep/Hands/Hands/'
+    dataroot = f'{args.input}/hands_v4/Hands/Hands/'
     nb_channels = 3 # For RGB images, but if you use grayscale images, ToTensor() will replicate the single channel into three channels, so you should not have to modify anything
     image_resize = 64
 
@@ -38,6 +38,7 @@ if __name__ == '__main__':
 
     # GPU or CPU (Not having at least 1 GPU can prevent code from working)
     device = torch.device("cuda:0" if (torch.cuda.is_available() and nb_gpu > 0) else "cpu")
+    print(f"device: {device}")
 
     # Create the dataset by applying transformation to our images
     dataset = dset.ImageFolder(root=dataroot,
@@ -308,10 +309,12 @@ if __name__ == '__main__':
         #         # Display image  
         #         plt.show()
         
+        
+        
         # Save models each 5 epochs
-        if epoch % 5 == 0:
-            if save_model:
-                save_dcgan(netG, netD, path_checkpoint=f"models/hands_epoch_{epoch}_checkpoint.pkl")
+        # if epoch % 5 == 0:
+        #     if save_model:
+        #         save_dcgan(netG, netD, path_checkpoint=f"models/hands_epoch_{epoch}_checkpoint.pkl")
             
     # Save the final models
-    save_dcgan(netG, netD, path_checkpoint="models/hands_final_epoch_checkpoint.pkl")
+    save_dcgan(netG, netD, path_checkpoint=f"{args.model}")
