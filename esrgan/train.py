@@ -14,10 +14,12 @@ from torch.autograd import Variable
 import torchvision.transforms as transforms
 from torchvision.utils import save_image, make_grid
 
-from models import *
-from datasets import *
+from esrgan.datasets import ImageDataset, denormalize
+
 
 from matplotlib import pyplot as plt
+
+from esrgan.models import GeneratorRRDB, Discriminator, FeatureExtractor
 
 if __name__ == '__main__':
     seed = 42
